@@ -39,7 +39,6 @@ last_artist = ""
 
 while True:
     title, artist = get_metadata()
-    print(f"Titre: {title} | Artiste: {artist}")  # Debug
 
     # Envoi uniquement si changement
     if title != last_title or artist != last_artist:
@@ -47,5 +46,7 @@ while True:
         ser.write(f"ARTIST:{artist}\n".encode())
         last_title = title
         last_artist = artist
+        
+        print(f"Titre: {title} | Artiste: {artist}")  # Debug
 
     time.sleep(1)  # Vérifie toutes les secondes
