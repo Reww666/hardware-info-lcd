@@ -24,14 +24,14 @@ def get_metadata():
     except subprocess.CalledProcessError:
         return "Aucune musique", "Aucun artiste"
 
-# Variables pour stocker les valeurs précédentes
+# Variables for storing previous values
 last_title = ""
 last_artist = ""
 
 while True:
     title, artist = get_metadata()
 
-    # Envoi uniquement si changement
+    # Send only if there is a change
     if title != last_title or artist != last_artist:
         message = f"TITLE:{title}\nARTIST:{artist}"
         try:
@@ -43,4 +43,4 @@ while True:
         last_title = title
         last_artist = artist
 
-    time.sleep(1)  # Vérifie toutes les secondes
+    time.sleep(1)  # Check every second

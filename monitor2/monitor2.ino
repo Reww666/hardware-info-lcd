@@ -14,14 +14,14 @@ int scrollIndexArtist = 0;
 bool scrollingTitle = false;
 bool scrollingArtist = false;
 
-bool isPausedTitle = true;  // true = affichage fixe, false = défilement
+bool isPausedTitle = true;  // true = fixed display, false = scrolling
 bool isPausedArtist = true;
 
-bool atEndTitle = false;   // true = on vient de finir le défilement (en pause à la fin)
+bool atEndTitle = false;   // true = scrolling hast just finished (pause at the end)
 bool atEndArtist = false;
 
-const unsigned long pauseDuration = 4000; // 4 secondes de pause
-const unsigned long scrollSpeed = 350;    // vitesse de défilement
+const unsigned long pauseDuration = 4000; // 4 seconds pause
+const unsigned long scrollSpeed = 350;    // Scroll speed
 
 int maxStepsTitle = 0;
 int maxStepsArtist = 0;
@@ -35,7 +35,7 @@ void setup() {
 void loop() {
     if (Serial.available() > 0) {
         String line = Serial.readStringUntil('\n');
-        line.trim(); // enlève un éventuel \r ou espace résiduel
+        line.trim(); // Remove any trainling \r or whitespace
 
         if (line.startsWith("TITLE:")) {
             currentTitle = line.substring(6);
@@ -51,7 +51,7 @@ void loop() {
             currentArtist = line.substring(7);
             scrollIndexArtist = 0;
             scrollingArtist = true;
-            maxStepsArtist = currentArtist.length() - 16;   // <-- bug fixé : était absent
+            maxStepsArtist = currentArtist.length() - 16; 
             if (maxStepsArtist < 0) maxStepsArtist = 0;
             isPausedArtist = true;
             atEndArtist = false;
@@ -67,8 +67,8 @@ void loop() {
                  scrollIndexArtist, maxStepsArtist, atEndArtist);
 }
 
-// Logique de défilement commune (utilisée pour le titre ET l'artiste)
-// Cycle : pause au début -> défilement -> pause à la fin -> retour au début -> ...
+// Common scrolling logic (used for both the title AND the artist)
+// Cycle: pause at the beginning -> scroll -> pause at the end -> return to the beginning -> ...
 void updateScroll(const String &text, bool scrolling, bool &isPaused,
                    unsigned long &lastAction, int &scrollIndex, int maxSteps,
                    bool &atEnd) {
@@ -77,16 +77,16 @@ void updateScroll(const String &text, bool scrolling, bool &isPaused,
     unsigned long now = millis();
 
     if (isPaused) {
-        // Phase fixe (soit au début, soit à la fin du défilement)
+        // Fixed phase (either at the beginning or at the end of scrolling)
         if (now - lastAction > pauseDuration) {
             if (atEnd) {
-                // La pause de fin est terminée : on revient au début
+                // The end pause is over: return to the beginning
                 scrollIndex = 0;
                 atEnd = false;
                 lastAction = now;
                 display();
-                // On reste en pause (isPaused reste true) pour marquer une
-                // pause de lecture au début avant de repartir en défilement.
+                // Stay paused (isPaused remains true) to indicate a
+                // playback pause at the beginning before scrolling resumes.
             } else {
                 // La pause de début est terminée : on lance le défilement
                 isPaused = false;
@@ -94,7 +94,7 @@ void updateScroll(const String &text, bool scrolling, bool &isPaused,
             }
         }
     } else {
-        // Phase défilement
+        // The beginning pause is over: start scrolling
         if (now - lastAction > scrollSpeed) {
             lastAction = now;
             scrollIndex++;
@@ -104,7 +104,7 @@ void updateScroll(const String &text, bool scrolling, bool &isPaused,
                 atEnd = true;
                 lastAction = now;
             }
-            display(); // redessine à chaque pas, y compris la dernière frame
+            display(); // Redraw at every step, including the last frame
         }
     }
 }
