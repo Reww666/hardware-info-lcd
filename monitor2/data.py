@@ -1,18 +1,9 @@
-import serial
 import subprocess
 import time
 import unidecode
+import requests
 
-PORT = '/dev/ttyACM0'
-BAUDRATE = 9600
-
-try:
-    ser = serial.Serial(PORT, BAUDRATE, timeout=1)
-    time.sleep(2)
-    print(f"Connecté à {PORT}")
-except serial.SerialException as e:
-    print(f"Erreur : {e}")
-    exit(1)
+SERVER_URL = "http://192.168.1.16:5000/update" # NAS IP
 
 def get_metadata():
     try:
@@ -42,11 +33,14 @@ while True:
 
     # Envoi uniquement si changement
     if title != last_title or artist != last_artist:
-        ser.write(f"TITLE:{title}\n".encode())
-        ser.write(f"ARTIST:{artist}\n".encode())
+        message = f"TITLE:{title}\nARTIST:{artist}"
+        try:
+            requests.post(SERVER_URL, json={"message": message})
+            print(f"Envoyé : {title} - {artist}")
+        except Exception as e:
+            print(f"Erreur envoi: {e}")
+
         last_title = title
         last_artist = artist
-        
-        print(f"Titre: {title} | Artiste: {artist}")  # Debug
 
     time.sleep(1)  # Vérifie toutes les secondes
