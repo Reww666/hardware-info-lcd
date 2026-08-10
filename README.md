@@ -1,11 +1,10 @@
+# 📟 LCD Server Monitor
 ![License](https://img.shields.io/github/license/Reww666/hardware-info-lcd)
 ![Python](https://img.shields.io/badge/python-3.x-blue?logo=python&logoColor=white)
 ![Arduino](https://img.shields.io/badge/arduino-IDE%20%2F%20CLI-00979D?logo=arduino&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Linux-lightgrey?logo=linux&logoColor=white)
 ![Last Commit](https://img.shields.io/github/last-commit/Reww666/hardware-info-lcd)
 ![Stars](https://img.shields.io/github/stars/Reww666/hardware-info-lcd?style=social)
-# 📟 LCD Server Monitor
-
 > Arduino-based display system showing real-time server metrics (CPU, RAM, disks) and currently playing music on a 16x2 LCD screen.
  
 > [!NOTE]
