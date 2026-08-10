@@ -54,10 +54,11 @@
 ### Monitor2 — Music display
 
 1. **Arduino** : upload `monitor2/monitor2.ino` using [arduino-cli](https://github.com/arduino/arduino-cli)
-2. **PC / NAS** : install Python dependencies
+2. **PC / NAS** : install [Python dependencies](https://pypi.org/project/pip/)
 ```bash
    pip install unidecode requests flask pyserial
-   sudo pacman -S playerctl  # on Arch/Garuda
+   sudo pacman -S playerctl  # on Arch/ Arch based
+   sudo apt install playerctl  # on Ubuntu / Debian based
 ```
 3. Edit the `SERVER_URL` in `monitor2/data.py` and the serial port in `monitor2/serverFlask.py` to match your setup
 4. Run the Flask server (on the machine connected to the Arduino)
