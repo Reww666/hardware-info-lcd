@@ -5,7 +5,7 @@ import threading
 import socket
 import os
 
-PORT = '/dev/ttyACM0'
+PORT = '/dev/ttyACM1'
 try:
     ser = serial.Serial(PORT, 9600, timeout=1)
     time.sleep(2)
@@ -39,6 +39,17 @@ def get_sys_info():
 
     return hostname, kernel, distro, uptime
 
+<<<<<<< HEAD
+def get_cpu_temp():
+    try:
+    # Intel / AMD (via k10temp)
+        if 'coretemp' in psutil.sensors_temperatures():
+            return psutil.sensors_temperatures()['coretemp'][0].current
+        elif 'k10temp' in psutil.sensors_temperatures():
+            return psutil.sensors_temperatures()['k10temp'][0].current
+        elif 'zenpower' in psutil.sensors_temperatures():
+            return psutil.sensors_temperatures()['zenpower'][0].current
+=======
 def get_temp():
     try:
         temps = psutil.sensors_temperatures()
@@ -49,15 +60,23 @@ def get_temp():
             return temps['k10temp'][0].current
         elif 'zenpower' in temps:
             return temps['zenpower'][0].current
+>>>>>>> 24dee79e3ca339691cc9edda845613514d167759
         else:
             return None
     except Exception as e:
         print(f"Erreur température : {e}")
         return None
 
+<<<<<<< HEAD
+
+def send():
+    while True:
+        temp = get_cpu_temp()
+=======
 def send():
     while True:
         temp = get_temp()
+>>>>>>> 24dee79e3ca339691cc9edda845613514d167759
         cpu = psutil.cpu_percent()
 
         ram = psutil.virtual_memory()
