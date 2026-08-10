@@ -4,6 +4,7 @@
  
 > [!NOTE]
 > **Monitor1** handles **stats**,
+> 
 > **Monitor2** handles **music** — *see each folder's script*
 
 ## 📦 Hardware
