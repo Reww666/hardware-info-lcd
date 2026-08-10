@@ -3,7 +3,7 @@
 > Arduino-based display system showing real-time server metrics (CPU, RAM, disks) and currently playing music on a 16x2 LCD screen.
  
 > [!NOTE]
-> Monitor1 handles stats, Monitor2 handles music — see each folder's script
+> **Monitor1** handles **stats**, **Monitor2** handles **music** — *see each folder's script*
 
 ## 📦 Hardware
 
