@@ -39,9 +39,25 @@ def get_sys_info():
 
     return hostname, kernel, distro, uptime
 
+def get_temp():
+    try:
+        temps = psutil.sensors_temperatures()
+        # Intel / AMD (via k10temp)
+        if 'coretemp' in temps:
+            return temps['coretemp'][0].current
+        elif 'k10temp' in temps:
+            return temps['k10temp'][0].current
+        elif 'zenpower' in temps:
+            return temps['zenpower'][0].current
+        else:
+            return None
+    except Exception as e:
+        print(f"Erreur température : {e}")
+        return None
+
 def send():
     while True:
-        temp = psutil.sensors_temperatures()['coretemp'][0].current
+        temp = get_temp()
         cpu = psutil.cpu_percent()
 
         ram = psutil.virtual_memory()
@@ -60,7 +76,8 @@ def send():
             percent = round(disk.percent, 1)
             disk_parts.append(f"{used}|{total}|{percent}|{path}")
 
-        base = f"DATA:{round(temp)}|{cpu:.1f}|{ram_used}|{ram_total}|{ip}|{hostname}|{kernel}|{distro}|{uptime:.2f}"
+        temp_str = round(temp) if temp is not None else 0
+        base = f"DATA:{temp_str}|{cpu:.1f}|{ram_used}|{ram_total}|{ip}|{hostname}|{kernel}|{distro}|{uptime:.2f}"
         msg = base + "|" + "|".join(disk_parts) + "\n"
 
         ser.write(msg.encode())
