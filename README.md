@@ -34,7 +34,7 @@
 
 ## 🔌 Installation
 
-1. **Arduino** : upload the `.ino` sketch using [`arduino-cli`](https://github.com/arduino/arduino-cli)
+1. **Arduino** : upload the `.ino` sketch using [arduino-cli](https://github.com/arduino/arduino-cli)
 2. **PC** : install Python dependencies
    ```bash
    pip install psutil pyserial unidecode requests flask
