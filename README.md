@@ -7,6 +7,13 @@
 > 
 > **Monitor2** handles **music** — *see each folder's script*
 
+## 📋 Table of Contents
+- [Hardware](#-hardware)
+- [Features](#-features)
+- [Installation](#-installation)
+  - [Monitor 1 — Stats](#monitor1--stats-display)
+  - [Monitor 2 — Music](#monitor2--music-display)
+
 ## 📦 Hardware
 
 - 2x Arduino (Mega 2560 and/or Uno)
