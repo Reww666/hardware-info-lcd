@@ -5,7 +5,7 @@
 
 ## 📦 Hardware
 
-- Arduino Mega 2560 (or Uno)
+- An Arduino Mega 2560 and an Uno (or 2 Uno)
 - 16x2 LCD with I2C backpack
 - 2 push buttons (mode navigation)
 - 10kΩ resistors (optional, internal pull-up used)
