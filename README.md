@@ -38,13 +38,33 @@
 
 ## 🔌 Installation
 
-1. **Arduino** : upload the `.ino` sketch using [arduino-cli](https://github.com/arduino/arduino-cli)
+### Monitor1 — Stats display
+
+1. **Arduino** : upload `monitor1/monitor1.ino` using [arduino-cli](https://github.com/arduino/arduino-cli)
 2. **PC** : install Python dependencies
-   ```bash
-   pip install psutil pyserial unidecode requests flask
+```bash
+   pip install psutil pyserial
+```
+3. Edit the `PORT` variable in `monitor1/data.py` to match your Arduino's serial port
+4. Run the sender script
+```bash
+   python monitor1/data.py
+```
+
+### Monitor2 — Music display
+
+1. **Arduino** : upload `monitor2/monitor2.ino` using [arduino-cli](https://github.com/arduino/arduino-cli)
+2. **PC / NAS** : install Python dependencies
+```bash
+   pip install unidecode requests flask pyserial
    sudo pacman -S playerctl  # on Arch/Garuda
-   ```
-3. Run the sender script
-   ```bash
-   python data.py
-   ```
+```
+3. Edit the `SERVER_URL` in `monitor2/data.py` and the serial port in `monitor2/serverFlask.py` to match your setup
+4. Run the Flask server (on the machine connected to the Arduino)
+```bash
+   python monitor2/serverFlask.py
+```
+5. Run the metadata sender (on the machine playing music, can be the same or different)
+```bash
+   python monitor2/data.py
+```
