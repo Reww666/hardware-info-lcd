@@ -2,7 +2,7 @@ from flask import Flask, request
 import serial
 import threading
 
-PORT = "/dev/ttyACM0"
+PORT = '/dev/ttyACM0'
 app = Flask(__name__)
 ser = serial.Serial(PORT, 9600)
 
