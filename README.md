@@ -34,7 +34,7 @@
 1. **Arduino** : upload the `.ino` sketch using `arduino-cli`
 2. **PC** : install Python dependencies
    ```bash
-   pip install psutil pyserial
+   pip install psutil pyserial unidecode requests flask
    sudo pacman -S playerctl  # on Arch/Garuda
    ```
 3. Run the sender script
