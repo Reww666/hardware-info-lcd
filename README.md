@@ -11,7 +11,7 @@
 - 10kΩ resistors (optional, internal pull-up used)
 - PC / server running Python scripts
 
-<img src="Wiring_diagram.pdf" alt="Wiring diagram" width="500">
+<img src="wiring_diagram.pdf" alt="Wiring diagram" width="500">
 
 
 ## 🔧 Features
